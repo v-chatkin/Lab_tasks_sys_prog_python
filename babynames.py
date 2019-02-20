@@ -162,11 +162,16 @@ def extract_names(filename):
     </td> </tr>
 
     """
+    f = filename.replace('file:///', "")
+    if not os.path.exists(f):
+        print("File not found")
+        sys.exit(1)
+
     html_names = urllib.request.urlopen(filename)
     html_names = html_names.read().decode('utf-8')
 
     names = re.findall(r'<td .+\s+\w\D+\n', html_names)
-    data = re.findall(r'\t\d.+\n',html_names)
+    data = re.findall(r'\t\d.+\n', html_names)
     #print(data)
     i = 0
     for el in names:
@@ -184,7 +189,7 @@ def extract_names(filename):
     data = group_four(data,5)
     #print(data)
     names_dist = dict(zip(names, data))
-    print(names_dist)
+    #print(names_dist)
 
     return names_dist
 
@@ -199,11 +204,16 @@ def print_names(babynames):
     keys = babynames.keys()
     keys = list(keys)
     keys.sort()
-    print(keys)
-    if (year in years):
+    #print(keys)
+    if year in years:
         data_col = years.index(year)
         for el in keys:
             print(el, ": ", babynames[el][data_col] )
+    elif year == 'q':
+        sys.exit(0)
+    else:
+        print('Invalid year')
+
 
     return
 
