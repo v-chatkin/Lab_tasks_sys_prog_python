@@ -42,7 +42,7 @@ def main():
     # который содержит имя скрипта
     args = sys.argv[1:]
     if not args:
-        print('usage: filename')
+        print('usage: directory path')
         sys.exit(1)
 
     dir_name = args[0]
