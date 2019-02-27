@@ -14,14 +14,14 @@ def get_filenames(dir_name):
 
 
 def get_md5(filename):
-    with open(filename, 'rb') as f:
-        m = hashlib.md5()
+    with open(filename, 'rb') as file:
+        file_hash = hashlib.md5()
         while True:
-            data = f.read(8192)
+            data = file.read(8192)
             if not data:
                 break
-            m.update(data)
-        return m.hexdigest()
+            file_hash.update(data)
+        return file_hash.hexdigest()
 
 
 def dup_search(filenames):
